@@ -1,18 +1,36 @@
 ---
-title: Pumas-AI Workshop PLACEHOLDER
-description: CHANGE ME.
+title: Pumas-AI NLME Modeling Workshop
+description: Workshop template for the introduction to non-linear mixed effects (NLME) modeling in Pumas.
 ---
 
 [![CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by-sa/4.0/)
 
-Short summary about the workshop.
+This workshop is an **introduction to non-linear mixed effects (NLME) modeling in Pumas**.
+
+It covers how to:
+
+- parse data into a `Population`
+- define models with `@model` by specifying:
+    - parameters with `@param`
+    - random effects with `@random`
+    - individual coefficients and statistical transformations with `@pre`
+    - model dynamics with `@dynamics`
+    - error models with `@derived`
+- perform estimation with `fit` and accounting for:
+    - different estimation methods such as `FOCE` and `LaplaceI`
+    - fixed parameters values
+
+ The following Julia files are provided:
+
+ 1. `01-population.jl`: covers how to define `Population`s from `DataFrames`
+ 1. `02-model.jl`: walks throught the `@model` syntax and the model blocks
+ 1. `03-fit.jl`: overview of different usages of the `fit` function
 
 !!! success "Prerequisites"
 
-    This workshop does PLACEHOLDER and PLACEHOLDER.
-    We recommend users being familiar with PLACEHOLDER, especially PLACEHOLDER.
+    We recommend users being familiar with Julia syntax, especially variables and types.
 
-    The formal requirements are the PLACEHOLDER WORKSHOP WITH LINK.
+    The formal requirements are the [Julia Syntax Workshop](https://github.com/PumasAI-Labs/Julia-Syntax) and its pre-requisites.
 
 ## Schedule
 
@@ -27,9 +45,7 @@ please send an email to <training@pumas.ai>.
 
 ## Authors
 
-- Author 1 - <email@example.com>
-- Author 2 - <email@example.com>
-- Author 3 - <email@example.com>
+- Jose Storopoli - <jose@pumas.ai>
 
 ## License
 

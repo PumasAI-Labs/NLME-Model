@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
-site_name: Pumas-AI Workshop PLACEHOLDER
-repo_name: PumasAI-Labs/Workshop-PLACEHOLDER
-repo_url: https://github.com/PumasAI-Labs/Workshop-PLACEHOLDER
+site_name: Pumas-AI NLME Modeling Workshop
+repo_name: PumasAI-Labs/NLME-Model
+repo_url: https://github.com/PumasAI-Labs/NLME-Model
 copyright: Copyright &copy; 2023 Pumas-AI, Inc.
 plugins:
   - search
