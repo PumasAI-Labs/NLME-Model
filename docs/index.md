@@ -42,11 +42,11 @@ The following Julia files are provided:
 | Time (HH:MM) | Activity                   | Description                              |
 | ------------ | -------------------------- | ---------------------------------------- |
 | 00:00        | Setup                      | Download files required for the workshop |
-| 00:15        | Parsing Data               | Showcase `01-population.jl`              |
-| 00:40        | Model Spefication          | Showcase `02-model.jl`                   |
-| 01:10        | Model Fitting              | Showcase `03-fit.jl`                     |
-| 01:30        | Model Confidence Intervals | Showcase `04-infer.jl`                   |
-| 01:45        | Closing Remarks            | See if there any questions and feedback  |
+| 00:05        | Parsing Data               | Showcase `01-population.jl`              |
+| 00:20        | Model Spefication          | Showcase `02-model.jl`                   |
+| 00:35        | Model Fitting              | Showcase `03-fit.jl`                     |
+| 00:45        | Model Confidence Intervals | Showcase `04-infer.jl`                   |
+| 00:55        | Closing Remarks            | See if there any questions and feedback  |
 
 ## Get in touch
 
