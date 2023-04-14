@@ -47,6 +47,19 @@ Showcase how to do the opposite, convert a `Population` or a `Subject` into a NM
 e.g. `DataFrame(pop)`.
 Additionally, demonstrate that you can use the `DataFrame` constructor into any of the previous slices and indexes of the original `Population.`
 
+Move to the `02-model.jl`.
+Start by explaining the `@model` macro: it allows you to specify model blocks inside it.
+With respect of the model blocks, begin with the `@metadata` block and stress the importance of specifying model description and time units.
+Explain the `@param` block with a focus on the different domains, e.g. `RealDomain` and `PDiagDomain`.
+Don't forget to teach users how to type LaTeX symbols in Julia/Pumas.
+Explain the `@random` block with a focus on the probabilistic assignment `~`.
+Explain the `@covariates` block and make sure that users understand that the covariates need to be also included in the `read_pumas` function when parsing the data into a `Population`.
+Explain the `@pre` block making analogies to NONMEM's `$PK` model block.
+Explain the `@dynamics` block by showing examples of both analytical solutions and system of ordinary differential equations,
+i.e. `Central1` versus `Central' = -(CL/VC) * Central`.
+Explain the `@derived` block with a focus on deterministic `=` and probabilistic `~` assignments,
+also for the DVs in this block remark users that they should be included in the `read_pumas` function as values to the `observations` keyword argument.
+
 ## Get in touch
 
 If you have any suggestions or want to get in touch with our education team,
