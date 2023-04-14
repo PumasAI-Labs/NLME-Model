@@ -11,33 +11,51 @@ title: Reference Sheets for Pumas-AI NLME Modeling Workshop
 - You can slice and index `Population`s to get another `Population` subset or a single `Subject`
 - You can reconstruct a NM-TRAN-formatted `DataFrame` from a `Population`/`Subject` with the `DataFrame` constructor
 - To define a model in Pumas, you use the `@model` macro along with the model blocks:
-    - `@metadata` for model metadata such as description and time units
-    - `@param` for the population parameters (i.e. typical values or fixed effects)
-    - `@random` for the subject-specific parameters (η or random effects)
-    - `@covariates` for subject covariates
-    - `@pre` for pre computations such as individual coefficients or any other statistical transformation
-    - `@dynamics` for the model dynamics, either as an analytical solution or a system of ordinary differential equations
-    - `@derived` for derived variables and error model
+  - `@metadata` for model metadata such as description and time units
+  - `@param` for the population parameters (i.e. typical values or fixed effects)
+  - `@random` for the subject-specific parameters (η or random effects)
+  - `@covariates` for subject covariates
+  - `@pre` for pre computations such as individual coefficients or any other statistical transformation
+  - `@dynamics` for the model dynamics, either as an analytical solution or a system of ordinary differential equations
+  - `@derived` for derived variables and error model
 - In the `@model` you can have two types of assignments:
-    - Deterministic assignments with `=`
-    - Probabilistic assignments with `~`
+  - Deterministic assignments with `=`
+  - Probabilistic assignments with `~`
+- The `fit` function is very flexible, it has 4 positional arguments:
+  1. `model`: which model to fit
+  1. `population`: which population to fit
+  1. `initial_parameters`: a `NamedTuple` of initial parameter estimates
+  1. `estimation_method`: which estimation method to use; for maximum likelihood: `FOCE`, `NaivePooled`, and `LaplaceI` are the most common
+- Additionally, the `fit` function has the following most used keyword arguments:
+  - `constantcoef`: if you want to set any parameter value to a constant value, similar to `FIX` in NONMEM
+  - `omegas`: a tuple with the value of the "omegas" in the `@param` block, needed for `NaivePooled` estimation method
+- All results from the `fit` function can be converted to a:
+  - `NamedTuple` with `coef`
+  - `DataFrame` with `coeftable`
+- You can extract individual coefficients with the `icoef` function, if you want in a `DataFrame` format use the `DataFrame` constructor on the result
 
 ## Summary of Basic Commands
 
-| Action                                                                            | Command                                       | Observations                   |
-| --------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------ |
-| Parse data into a `Population`                                                    | `read_pumas`                                  | NM-TRAN-formatted `DataFrame`s |
-| Index or slice a `Population`                                                     | `pop[1]` or `pop[1:10]`                       |                                |
-| Reconstruct data from a `Population`                                              | `DataFrame(pop)`                              | NM-TRAN-formatted `DataFrame`s |
-| Reconstruct data from a index or slice `Population`                               | `DataFrame(pop[1])` or `DataFrame(pop[1:10])` | NM-TRAN-formatted `DataFrame`s |
-| Define a model                                                                    | `@model`                                      |
-| Define model metadata                                                             | `@metadata`                                   |
-| Define the population parameters of a model                                       | `@param`                                      |
-| Define the subject-specific parameters of a model                                 | `@random`                                     |
-| Define the subject covariates                                                     | `@covariates`                                 |
-| Define individual coefficients, precomputations or any statistical transformation | `@pre`                                        |
-| Define model dynamics                                                             | `@dynamics`                                   |
-| Define model derived variables and error model                                    | `@derived`                                    |
+| Action                                                                            | Command                                                                                | Observations                                                                                                                      |
+| --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Parse data into a `Population`                                                    | `read_pumas`                                                                           | NM-TRAN-formatted `DataFrame`s                                                                                                    |
+| Index or slice a `Population`                                                     | `pop[1]` or `pop[1:10]`                                                                |                                                                                                                                   |
+| Reconstruct data from a `Population`                                              | `DataFrame(pop)`                                                                       | NM-TRAN-formatted `DataFrame`s                                                                                                    |
+| Reconstruct data from a index or slice `Population`                               | `DataFrame(pop[1])` or `DataFrame(pop[1:10])`                                          | NM-TRAN-formatted `DataFrame`s                                                                                                    |
+| Define a model                                                                    | `@model`                                                                               |
+| Define model metadata                                                             | `@metadata`                                                                            |
+| Define the population parameters of a model                                       | `@param`                                                                               |
+| Define the subject-specific parameters of a model                                 | `@random`                                                                              |
+| Define the subject covariates                                                     | `@covariates`                                                                          |
+| Define individual coefficients, precomputations or any statistical transformation | `@pre`                                                                                 |
+| Define model dynamics                                                             | `@dynamics`                                                                            |
+| Define model derived variables and error model                                    | `@derived`                                                                             |
+| Fit a model using `FOCE()`                                                        | `fit(model, population, initial_parameters, FOCE())`                                   | `initial_parameters` is a `NamedTuple` of parameter name and values                                                               |
+| Fit a model using `NaivePooled`                                                   | `fit(model, population, initial_parameters, NaivePooled(); omegas=(:Ω,))`              | `omegas` is a keyword argument that should be a tuple specifying the variable name where the Ωs are defined in the model          |
+| Fit a model using `FOCE()` with fixed parameter values                            | `fit(model, population, initial_parameters, FOCE(); constantcoef=(; parameter=value))` | `constantcoef` is a keyword argument that should be a `NamedTuple` specifying the parameter name along with the value to be fixed |
+| Get model fit coefficients as a `NamedTuple`                                      | `coef(fit_result)`                                                                     |
+| Get model fit coefficients as a `DataFrame`                                       | `coeftable(fit_result)`                                                                |
+| Get model individual parameters as a `DataFrame`                                  | `DataFrame(icoef(fit_result))`                                                         |
 
 ## Glossary
 
@@ -117,6 +135,44 @@ Probabilistic assignments
 samples a random value under a distribution.
 For example, `x ~ Normal(0, 1)` will generate a new value sampled from a normal distribution with mean 0 and standard deviation 1
 every time it is executed.
+
+Model
+
+: Mathematical representation of the underlying process regarding a certain phenomena.
+
+Fit
+
+: Condition the data into the model and infer the model's parameter values by an estimation method.
+
+FOCE
+
+: Estimation method originally from NONMEM, it means **F**irst **O**rder **C**onditional **E**ffects.
+Please refer to the [Pumas documentation](htts://docs.pumas.ai) for more details.
+
+Naive Pooled
+
+: Estimation method that ignores subject-specific parameters relying only on population parameters.
+Please refer to the [Pumas documentation](htts://docs.pumas.ai) for more details.
+
+Laplace
+
+: Estimation method that uses Laplacian approximation under the hood.
+Please refer to the [Pumas documentation](htts://docs.pumas.ai) for more details.
+
+Ω
+
+: The covariance matrix of the subject-specific parameters.
+Commonly referred as the "Omega" matrix.
+
+η
+
+: The individual subject-specific parameters.
+Commonly referred as "etas".
+Generally a vector for each subject, e.g. `η = [η₁, η₂]`.
+
+`icoef`
+
+: Individual coefficients, also known as subject-specific parameters.
 
 ## Get in touch
 

@@ -60,6 +60,24 @@ i.e. `Central1` versus `Central' = -(CL/VC) * Central`.
 Explain the `@derived` block with a focus on deterministic `=` and probabilistic `~` assignments,
 also for the DVs in this block remark users that they should be included in the `read_pumas` function as values to the `observations` keyword argument.
 
+Proceed to the `03-fit.jl`.
+Begin by showing how to define a initial parameter values `NamedTuple`.
+Then, highlight that the `fit` function takes four positional arguments:
+
+1. `model`: which model to fit
+1. `population`: which population to fit
+1. `initial_parameters`: a `NamedTuple` of initial parameter estimates
+1. `estimation_method`: which estimation method to use; for maximum likelihood: `FOCE`, `NaivePooled`, and `LaplaceI` are the most common
+
+Perform a fit using `FOCE()`.
+Perform a fit using `NaivePooled`.
+Don't forget to explain the `omegas` keyword argument when fitting with `NaivePooled`.
+Perform a fit using `LaplaceI`.
+Perform a fit with fixed parameter values using the `constantcoef` keyword argument.
+Show how to get the parameter estimates using `coef` for a `NamedTuple`,
+and `coeftable` for a `DataFrame`.
+Finally, show how to get a `DataFrame` of the individual subject-specific parameters with `icoef`.
+
 ## Get in touch
 
 If you have any suggestions or want to get in touch with our education team,
