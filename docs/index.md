@@ -19,12 +19,17 @@ It covers how to:
 - perform estimation with `fit` and accounting for:
     - different estimation methods such as `FOCE` and `LaplaceI`
     - fixed parameters values
+- calculate confidence intervals with `infer` by using:
+    - variance-covariance matrix
+    - bootstrap
+    - sampling importance resampling (SIR)
 
- The following Julia files are provided:
+The following Julia files are provided:
 
- 1. `01-population.jl`: covers how to define `Population`s from `DataFrames`
- 1. `02-model.jl`: walks throught the `@model` syntax and the model blocks
- 1. `03-fit.jl`: overview of different usages of the `fit` function
+1.  `01-population.jl`: covers how to define `Population`s from `DataFrames`
+1.  `02-model.jl`: walks throught the `@model` syntax and the model blocks
+1.  `03-fit.jl`: overview of different usages of the `fit` function
+1.  `04-infer.jl`: overview of different usages of the `infer` function
 
 !!! success "Prerequisites"
 
@@ -34,9 +39,14 @@ It covers how to:
 
 ## Schedule
 
-| Time (HH:MM) | Activity | Description                              |
-| ------------ | -------- | ---------------------------------------- |
-| 00:00        | Setup    | Download files required for the workshop |
+| Time (HH:MM) | Activity                   | Description                              |
+| ------------ | -------------------------- | ---------------------------------------- |
+| 00:00        | Setup                      | Download files required for the workshop |
+| 00:15        | Parsing Data               | Showcase `01-population.jl`              |
+| 00:40        | Model Spefication          | Showcase `02-model.jl`                   |
+| 01:10        | Model Fitting              | Showcase `03-fit.jl`                     |
+| 01:30        | Model Confidence Intervals | Showcase `04-infer.jl`                   |
+| 01:45        | Closing Remarks            | See if there any questions and feedback  |
 
 ## Get in touch
 
