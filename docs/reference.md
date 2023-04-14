@@ -11,28 +11,33 @@ title: Reference Sheets for Pumas-AI NLME Modeling Workshop
 - You can slice and index `Population`s to get another `Population` subset or a single `Subject`
 - You can reconstruct a NM-TRAN-formatted `DataFrame` from a `Population`/`Subject` with the `DataFrame` constructor
 - To define a model in Pumas, you use the `@model` macro along with the model blocks:
-  - `@metadata` for model metadata such as description and time units
-  - `@param` for the population parameters (i.e. typical values or fixed effects)
-  - `@random` for the subject-specific parameters (η or random effects)
-  - `@covariates` for subject covariates
-  - `@pre` for pre computations such as individual coefficients or any other statistical transformation
-  - `@dynamics` for the model dynamics, either as an analytical solution or a system of ordinary differential equations
-  - `@derived` for derived variables and error model
+    - `@metadata` for model metadata such as description and time units
+    - `@param` for the population parameters (i.e. typical values or fixed effects)
+    - `@random` for the subject-specific parameters (η or random effects)
+    - `@covariates` for subject covariates
+    - `@pre` for pre computations such as individual coefficients or any other statistical transformation
+    - `@dynamics` for the model dynamics, either as an analytical solution or a system of ordinary differential equations
+    - `@derived` for derived variables and error model
 - In the `@model` you can have two types of assignments:
-  - Deterministic assignments with `=`
-  - Probabilistic assignments with `~`
+    - Deterministic assignments with `=`
+    - Probabilistic assignments with `~`
 - The `fit` function is very flexible, it has 4 positional arguments:
-  1. `model`: which model to fit
-  1. `population`: which population to fit
-  1. `initial_parameters`: a `NamedTuple` of initial parameter estimates
-  1. `estimation_method`: which estimation method to use; for maximum likelihood: `FOCE`, `NaivePooled`, and `LaplaceI` are the most common
+    1. `model`: which model to fit
+    1. `population`: which population to fit
+    1. `initial_parameters`: a `NamedTuple` of initial parameter estimates
+    1. `estimation_method`: which estimation method to use; for maximum likelihood: `FOCE`, `NaivePooled`, and `LaplaceI` are the most common
 - Additionally, the `fit` function has the following most used keyword arguments:
-  - `constantcoef`: if you want to set any parameter value to a constant value, similar to `FIX` in NONMEM
-  - `omegas`: a tuple with the value of the "omegas" in the `@param` block, needed for `NaivePooled` estimation method
+    - `constantcoef`: if you want to set any parameter value to a constant value, similar to `FIX` in NONMEM
+    - `omegas`: a tuple with the value of the "omegas" in the `@param` block, needed for `NaivePooled` estimation method
 - All results from the `fit` function can be converted to a:
-  - `NamedTuple` with `coef`
-  - `DataFrame` with `coeftable`
+    - `NamedTuple` with `coef`
+    - `DataFrame` with `coeftable`
 - You can extract individual coefficients with the `icoef` function, if you want in a `DataFrame` format use the `DataFrame` constructor on the result
+- The `infer` function can be used to generate confidence intervals using:
+    - Variance-covariance matrix (default)
+    - Bootstrap with a second argument `Pumas.Bootstrap()`
+    - Sampling importance resampling (SIR) with a second argument `Pumas.SIR()`
+- All results from the `infer` function can be converted to a `DataFrame` with `coeftable`
 
 ## Summary of Basic Commands
 
@@ -56,6 +61,10 @@ title: Reference Sheets for Pumas-AI NLME Modeling Workshop
 | Get model fit coefficients as a `NamedTuple`                                      | `coef(fit_result)`                                                                     |
 | Get model fit coefficients as a `DataFrame`                                       | `coeftable(fit_result)`                                                                |
 | Get model individual parameters as a `DataFrame`                                  | `DataFrame(icoef(fit_result))`                                                         |
+| Calculate confidence intervals using the Variance-covariance matrix               | `infer(fit_result)`                                                                    | Uses the sandwich estimator by default                                                                                            |
+| Calculate confidence intervals using bootsrap                                     | `infer(fit_result, Pumas.Bootstrap())`                                                 | Perform 200 samples by default                                                                                                    |
+| Calculate confidence intervals using sampling importance resampling (SIR)         | `infer(fit_result, SIR())`                                                             | User needs to specify number of samples and resamples, i.e. there aren't default values                                           |
+| Get model confidence intervals as a `DataFrame`                                   | `coeftable(infer_result)`                                                              |
 
 ## Glossary
 
@@ -173,6 +182,29 @@ Generally a vector for each subject, e.g. `η = [η₁, η₂]`.
 `icoef`
 
 : Individual coefficients, also known as subject-specific parameters.
+
+Confidence intervals
+
+: Commonly used procedure to measure uncertainty on parameter estimates in maximum likelihood estimation methods.
+
+Variance-covariance matrix
+
+: A symmetric matrix with `NxN` dimensions where `N` is the number of parameters,
+the diagonals are the parameter variances,
+and the symmetric off-diagonal elements are the covariance between the parameter in the `i`th row and the parameter in the `j` row.
+
+Sandwich estimator
+
+: Commonly used procedure to generate a Variance-covariance matrix from pharmacometrics model fit.
+
+Bootstrap
+
+: Alternative way to calculate confidence intervals by fitting the model to `N` bootstrapped samples,
+that are generated by sampling with replacement the original sample a new sample with the same size as the original.
+
+Sampling importance resampling (SIR)
+
+: Alternative way to calculate confidence intervals that rely on the importance sampling procedure.
 
 ## Get in touch
 

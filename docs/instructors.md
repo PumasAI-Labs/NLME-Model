@@ -78,6 +78,18 @@ Show how to get the parameter estimates using `coef` for a `NamedTuple`,
 and `coeftable` for a `DataFrame`.
 Finally, show how to get a `DataFrame` of the individual subject-specific parameters with `icoef`.
 
+Open `04-infer.jl`.
+Showcase how to calculate confidence intervals (CIs) using the `infer` function.
+The default case will generate CIs using the variance-covariance matrix calculated using the sandwich estimator.
+You can pass an optional second positional argument for alternate ways to generate CIs.
+If you pass `Pumas.Bootstrap()` as the second positional argument you will generate CIs using bootstrap,
+which by default fits the model to 200 bootstrapped samples.
+If you pass `Pumas.SIR()` as the second positional argument you will generate CIs using the sampling importance resamplling (SIR) method.
+Warn the user that `Pumas.SIR()` does not have default values,
+hence it is necessary to always specify the keyword arguments `samples` and `resamples`.
+
+Finalize the workshop by asking for questions and getting feedback from the users.
+
 ## Get in touch
 
 If you have any suggestions or want to get in touch with our education team,
