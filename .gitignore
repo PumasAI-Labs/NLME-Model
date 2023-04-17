@@ -1,3 +1,7 @@
 # Python env
 env/
 .venv/
+
+# Julia stuff
+Project.toml
+Manifest.toml
