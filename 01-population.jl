@@ -17,7 +17,8 @@ pkdata = dataset("iv_sd_3")
 # The function that parses data into a Population is read_pumas
 # Check the docstring with ?read_pumas in your Julia REPL
 # Specifically, the keyword arguments
-?read_pumas
+
+#?read_pumas
 
 # Now let's read our DataFrame into a Population with read_pumas
 pop = read_pumas(
