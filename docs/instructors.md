@@ -6,8 +6,8 @@ title: Instructor's Notes for Pumas-AI NLME Modeling Workshop
 
 Start with the `01-population.jl` file.
 Show users how to load `Pumas` with the `using` statement.
-Load a NMTRAN-formatted `DataFrame`,
-show a preview of the data by going over the column names.
+Load an NMTRAN-formatted `DataFrame`,
+and show a preview of the data by going over the column names.
 Explain the difference between `evid`s and why some rows have `missing` values
 (measurement rows, `evid == 1`).
 We suggest using the `iv_sd_3` dataset from `PharmaDatasets.jl`.
@@ -15,7 +15,7 @@ We suggest using the `iv_sd_3` dataset from `PharmaDatasets.jl`.
 Once users are familiar with the NMTRAN format dataset,
 introduce the `read_pumas` function to parse NMTRAN-formatted `DataFrame`s into a `Population`.
 Go over the `read_pumas`' docstring (`?read_pumas`) with extra attention on the keyword arguments.
-The keyword arguments that you should focus are:
+The keyword arguments that you should focus on are:
 
 - `observations`
 - `covariates`
@@ -43,19 +43,19 @@ Explain that `Population` is simply a collection (`Vector`) of `Subject`s by ind
 Like any Julia `Vector` you can also slice a `Population`.
 Show how to slice a `Population` into a subset of the original `Population`.
 
-Showcase how to do the opposite, convert a `Population` or a `Subject` into a NMTRAN-formatted `DataFrame` with the `DataFrame` constructor,
+Showcase how to do the opposite, convert a `Population` or a `Subject` into an NMTRAN-formatted `DataFrame` with the `DataFrame` constructor,
 e.g. `DataFrame(pop)`.
 Additionally, demonstrate that you can use the `DataFrame` constructor into any of the previous slices and indexes of the original `Population.`
 
 Move to the `02-model.jl`.
 Start by explaining the `@model` macro: it allows you to specify model blocks inside it.
-With respect of the model blocks, begin with the `@metadata` block and stress the importance of specifying model description and time units.
+With respect to the model blocks, begin with the `@metadata` block and stress the importance of specifying model description and time units.
 Explain the `@param` block with a focus on the different domains, e.g. `RealDomain` and `PDiagDomain`.
 Don't forget to teach users how to type LaTeX symbols in Julia/Pumas.
 Explain the `@random` block with a focus on the probabilistic assignment `~`.
 Explain the `@covariates` block and make sure that users understand that the covariates need to be also included in the `read_pumas` function when parsing the data into a `Population`.
 Explain the `@pre` block making analogies to NONMEM's `$PK` model block.
-Explain the `@dynamics` block by showing examples of both analytical solutions and system of ordinary differential equations,
+Explain the `@dynamics` block by showing examples of both analytical solutions and systems of ordinary differential equations,
 i.e. `Central1` versus `Central' = -(CL/VC) * Central`.
 Explain the `@derived` block with a focus on deterministic `=` and probabilistic `~` assignments,
 also for the DVs in this block remark users that they should be included in the `read_pumas` function as values to the `observations` keyword argument.
@@ -84,7 +84,7 @@ The default case will generate CIs using the variance-covariance matrix calculat
 You can pass an optional second positional argument for alternate ways to generate CIs.
 If you pass `Pumas.Bootstrap()` as the second positional argument you will generate CIs using bootstrap,
 which by default fits the model to 200 bootstrapped samples.
-If you pass `Pumas.SIR()` as the second positional argument you will generate CIs using the sampling importance resamplling (SIR) method.
+If you pass `Pumas.SIR()` as the second positional argument you will generate CIs using the sampling importance resampling (SIR) method.
 Warn the user that `Pumas.SIR()` does not have default values,
 hence it is necessary to always specify the keyword arguments `samples` and `resamples`.
 

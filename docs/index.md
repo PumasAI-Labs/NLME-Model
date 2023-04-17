@@ -16,7 +16,7 @@ It covers how to:
     - individual coefficients and statistical transformations with `@pre`
     - model dynamics with `@dynamics`
     - error models with `@derived`
-- perform estimation with `fit` and accounting for:
+- perform an estimation with `fit` and accounting for:
     - different estimation methods such as `FOCE` and `LaplaceI`
     - fixed parameters values
 - calculate confidence intervals with `infer` by using:
@@ -27,9 +27,9 @@ It covers how to:
 The following Julia files are provided:
 
 1.  `01-population.jl`: covers how to define `Population`s from `DataFrames`
-1.  `02-model.jl`: walks throught the `@model` syntax and the model blocks
-1.  `03-fit.jl`: overview of different usages of the `fit` function
-1.  `04-infer.jl`: overview of different usages of the `infer` function
+1.  `02-model.jl`: walks through the `@model` syntax and the model blocks
+1.  `03-fit.jl`: an overview of different usages of the `fit` function
+1.  `04-infer.jl`: an overview of different usages of the `infer` function
 
 !!! success "Prerequisites"
 
@@ -43,10 +43,10 @@ The following Julia files are provided:
 | ------------ | -------------------------- | ---------------------------------------- |
 | 00:00        | Setup                      | Download files required for the workshop |
 | 00:05        | Parsing Data               | Showcase `01-population.jl`              |
-| 00:20        | Model Spefication          | Showcase `02-model.jl`                   |
+| 00:20        | Model Specification          | Showcase `02-model.jl`                   |
 | 00:35        | Model Fitting              | Showcase `03-fit.jl`                     |
 | 00:45        | Model Confidence Intervals | Showcase `04-infer.jl`                   |
-| 00:55        | Closing Remarks            | See if there any questions and feedback  |
+| 00:55        | Closing Remarks            | See if there are any questions and feedback  |
 
 ## Get in touch
 

@@ -62,8 +62,8 @@ title: Reference Sheets for Pumas-AI NLME Modeling Workshop
 | Get model fit coefficients as a `DataFrame`                                       | `coeftable(fit_result)`                                                                |
 | Get model individual parameters as a `DataFrame`                                  | `DataFrame(icoef(fit_result))`                                                         |
 | Calculate confidence intervals using the Variance-covariance matrix               | `infer(fit_result)`                                                                    | Uses the sandwich estimator by default                                                                                            |
-| Calculate confidence intervals using bootsrap                                     | `infer(fit_result, Pumas.Bootstrap())`                                                 | Perform 200 samples by default                                                                                                    |
-| Calculate confidence intervals using sampling importance resampling (SIR)         | `infer(fit_result, SIR())`                                                             | User needs to specify number of samples and resamples, i.e. there aren't default values                                           |
+| Calculate confidence intervals using bootstrap                                     | `infer(fit_result, Pumas.Bootstrap())`                                                 | Perform 200 samples by default                                                                                                    |
+| Calculate confidence intervals using sampling importance resampling (SIR)         | `infer(fit_result, SIR())`                                                             | User needs to specify the number of samples and resamples, i.e. there aren't default values                                           |
 | Get model confidence intervals as a `DataFrame`                                   | `coeftable(infer_result)`                                                              |
 
 ## Glossary
@@ -156,27 +156,27 @@ Fit
 FOCE
 
 : Estimation method originally from NONMEM, it means **F**irst **O**rder **C**onditional **E**ffects.
-Please refer to the [Pumas documentation](htts://docs.pumas.ai) for more details.
+Please refer to the [Pumas documentation](https://docs.pumas.ai) for more details.
 
 Naive Pooled
 
 : Estimation method that ignores subject-specific parameters relying only on population parameters.
-Please refer to the [Pumas documentation](htts://docs.pumas.ai) for more details.
+Please refer to the [Pumas documentation](https://docs.pumas.ai) for more details.
 
 Laplace
 
 : Estimation method that uses Laplacian approximation under the hood.
-Please refer to the [Pumas documentation](htts://docs.pumas.ai) for more details.
+Please refer to the [Pumas documentation](https://docs.pumas.ai) for more details.
 
 Ω
 
 : The covariance matrix of the subject-specific parameters.
-Commonly referred as the "Omega" matrix.
+Commonly referred to as the "Omega" matrix.
 
 η
 
 : The individual subject-specific parameters.
-Commonly referred as "etas".
+Commonly referred to as "etas".
 Generally a vector for each subject, e.g. `η = [η₁, η₂]`.
 
 `icoef`
