@@ -8,7 +8,7 @@ If you want to contribute to this workshop,
 please open a pull request at [`PumasAI-Labs/NLME-Model`](https://github.com/PumasAI-Labs/NLME-Model).
 
 By submitting a pull request,
-you are in accordance that your contribution will be licensed under [Creative Commons Attribution-ShareAlike 4.0 Internacional](http://creativecommons.org/licenses/by-sa/4.0/).
+you are in accordance that your contribution will be licensed under [Creative Commons Attribution-ShareAlike 4.0 International](http://creativecommons.org/licenses/by-sa/4.0/).
 
 Once your pull request is approved and merged,
 you'll be acknowledged as one of the authors in the workshop site and GitHub repository.
