@@ -7,7 +7,7 @@ infer_cis = infer(fit_foce)
 infer_cis_bs = infer(fit_foce, Pumas.Bootstrap())
 
 # Confidence intervals using sampling importance resampling (SIR)
-infer_cis_sir = infer(fit_foce, Pumas.SIR(; samples=100, resamples=10))
+infer_cis_sir = infer(fit_foce, Pumas.SIR(; samples = 100, resamples = 10))
 
 # Any result from infer can be converted to a DataFrame with coeftable
 coeftable(infer_cis)
