@@ -10,10 +10,10 @@ model = @model begin
 
   @param begin
     # here we define the parameters of the model
-    tvcl ∈ RealDomain(; lower=0.001) # typical clearance 
-    tvvc ∈ RealDomain(; lower=0.001) # typical central volume of distribution
+    tvcl ∈ RealDomain(; lower = 0.001) # typical clearance 
+    tvvc ∈ RealDomain(; lower = 0.001) # typical central volume of distribution
     Ω ∈ PDiagDomain(2)                 # between-subject variability
-    σ ∈ RealDomain(; lower=0.001)    # residual variability
+    σ ∈ RealDomain(; lower = 0.001)    # residual variability
   end
 
   @random begin
@@ -43,4 +43,3 @@ model = @model begin
     dv ~ @. Normal(cp, cp * σ)
   end
 end
-

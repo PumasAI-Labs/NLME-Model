@@ -23,14 +23,14 @@ pkdata = dataset("iv_sd_3")
 # Now let's read our DataFrame into a Population with read_pumas
 pop = read_pumas(
   pkdata;
-  observations=[:dv], # this is a vector of column names
-  covariates=[:dosegrp], # this is a vector of column names
-  id=:id,
-  time=:time,
-  amt=:amt,
-  evid=:evid,
-  cmt=:cmt,
-  rate=:rate,
+  observations = [:dv], # this is a vector of column names
+  covariates = [:dosegrp], # this is a vector of column names
+  id = :id,
+  time = :time,
+  amt = :amt,
+  evid = :evid,
+  cmt = :cmt,
+  rate = :rate,
 )
 
 # A Population is simply a vector of Subjects
